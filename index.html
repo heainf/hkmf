@@ -27,7 +27,7 @@
             margin: 10px 0 5px;
             font-weight: bold;
         }
-        input, textarea {
+        input, select, textarea {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
@@ -55,19 +55,63 @@
         <p>請填寫以下資料，幫助我們建立管理費資料庫。感謝你的參與！</p>
         <form id="estateForm" action="https://script.google.com/macros/s/AKfycbwvcU6zfG8AdPYE4hiId9tbf5-G2vXh3Yk2pAokMb0vglT_iB7nwYcoPXTvXZV6L0KQag/exec" method="POST" target="hiddenFrame" onsubmit="submitForm()">
             <label for="estateName">屋苑名稱 *</label>
-            <input type="text" id="estateName" name="estateName" required placeholder="例如：淘大花園">
+            <select id="estateName" name="estateName" required onchange="toggleCustomEstate(this)">
+                <option value="得寶花園" selected>得寶花園</option>
+                <option value="淘大花園">淘大花園</option>
+                <option value="德福花園">德福花園</option>
+                <option value="custom">自己輸入</option>
+            </select>
+            <input type="text" id="customEstate" name="customEstate" style="display:none;" placeholder="請輸入屋苑名稱">
 
-            <label for="address">地址</label>
-            <input type="text" id="address" name="address" placeholder="例如：牛頭角道77號">
+            <label for="buildingNumber">座數</label>
+            <select id="buildingNumber" name="buildingNumber" onchange="toggleCustomBuilding(this)">
+                <option value="" selected>請選擇</option>
+                <!-- 1-20 -->
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                <option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+                <option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
+                <option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+                <!-- A-Z -->
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
+                <option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option><option value="J">J</option>
+                <option value="K">K</option><option value="L">L</option><option value="M">M</option><option value="N">N</option><option value="O">O</option>
+                <option value="P">P</option><option value="Q">Q</option><option value="R">R</option><option value="S">S</option><option value="T">T</option>
+                <option value="U">U</option><option value="V">V</option><option value="W">W</option><option value="X">X</option><option value="Y">Y</option>
+                <option value="Z">Z</option>
+                <option value="custom">自己輸入</option>
+            </select>
+            <input type="text" id="customBuilding" name="customBuilding" style="display:none;" placeholder="請輸入座數">
 
-            <label for="buildingCount">物業座數</label>
-            <input type="number" id="buildingCount" name="buildingCount" min="1" placeholder="例如：19">
+            <label for="unitNumber">單位</label>
+            <select id="unitNumber" name="unitNumber" onchange="toggleCustomUnit(this)">
+                <option value="" selected>請選擇</option>
+                <!-- 1-20 -->
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                <option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+                <option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
+                <option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+                <!-- A-Z -->
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option>
+                <option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option><option value="J">J</option>
+                <option value="K">K</option><option value="L">L</option><option value="M">M</option><option value="N">N</option><option value="O">O</option>
+                <option value="P">P</option><option value="Q">Q</option><option value="R">R</option><option value="S">S</option><option value="T">T</option>
+                <option value="U">U</option><option value="V">V</option><option value="W">W</option><option value="X">X</option><option value="Y">Y</option>
+                <option value="Z">Z</option>
+                <option value="custom">自己輸入</option>
+            </select>
+            <input type="text" id="customUnit" name="customUnit" style="display:none;" placeholder="請輸入單位">
 
-            <label for="unitCount">單位總數</label>
-            <input type="number" id="unitCount" name="unitCount" min="1" placeholder="例如：4896">
+            <label for="area">實用面積 (平方呎)</label>
+            <input type="text" id="area" name="area" placeholder="例如：300">
 
             <label for="managementFee">管理費 (HK$/呎)</label>
-            <input type="text" id="managementFee" name="managementFee" placeholder="例如：2.7 或 未知填 --">
+            <input type="text" id="managementFee" name="managementFee" placeholder="例如：2.7">
+
+            <label for="year">年份 (四位)</label>
+            <input type="text" id="year" name="year" maxlength="4" placeholder="例如：2023">
+
+            <label for="date">日期 (如有)</label>
+            <input type="text" id="date" name="date" placeholder="例如：2023-10-15">
 
             <label for="comments">備註</label>
             <textarea id="comments" name="comments" rows="4" placeholder="其他相關信息"></textarea>
@@ -78,11 +122,61 @@
     </div>
 
     <script>
+        function toggleCustomEstate(select) {
+            const customInput = document.getElementById('customEstate');
+            if (select.value === 'custom') {
+                customInput.style.display = 'block';
+                customInput.required = true;
+            } else {
+                customInput.style.display = 'none';
+                customInput.required = false;
+                customInput.value = '';
+            }
+        }
+
+        function toggleCustomBuilding(select) {
+            const customInput = document.getElementById('customBuilding');
+            if (select.value === 'custom') {
+                customInput.style.display = 'block';
+            } else {
+                customInput.style.display = 'none';
+                customInput.value = '';
+            }
+        }
+
+        function toggleCustomUnit(select) {
+            const customInput = document.getElementById('customUnit');
+            if (select.value === 'custom') {
+                customInput.style.display = 'block';
+            } else {
+                customInput.style.display = 'none';
+                customInput.value = '';
+            }
+        }
+
         function submitForm() {
+            const estateSelect = document.getElementById('estateName');
+            const customEstate = document.getElementById('customEstate');
+            if (estateSelect.value === 'custom' && customEstate.value) {
+                estateSelect.value = customEstate.value; // 將自訂值傳回主欄位
+            }
+
+            const buildingSelect = document.getElementById('buildingNumber');
+            const customBuilding = document.getElementById('customBuilding');
+            if (buildingSelect.value === 'custom' && customBuilding.value) {
+                buildingSelect.value = customBuilding.value;
+            }
+
+            const unitSelect = document.getElementById('unitNumber');
+            const customUnit = document.getElementById('customUnit');
+            if (unitSelect.value === 'custom' && customUnit.value) {
+                unitSelect.value = customUnit.value;
+            }
+
             setTimeout(() => {
                 alert('感謝你的提交！資料已成功儲存到Google Sheets。');
                 document.getElementById('estateForm').reset();
-            }, 1000); // 延遲1秒顯示成功訊息，確保提交完成
+            }, 1000);
         }
     </script>
 </body>
