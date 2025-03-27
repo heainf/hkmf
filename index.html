@@ -89,10 +89,15 @@
                 body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                mode: 'no-cors' // 避免CORS問題
+                }
             })
-            .then(() => {
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('伺服器回應錯誤，狀態碼：' + response.status);
+                }
+                return response.text();
+            })
+            .then(result => {
                 alert('感謝你的提交！資料已成功儲存到Google Sheets。');
                 form.reset();
             })
