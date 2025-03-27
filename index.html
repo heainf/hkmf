@@ -51,7 +51,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>香港屋苑管理費資料收集</h1>
+        <h1>香港屋苑管理費資料收集(匿名)</h1>
         <p>請填寫以下資料，幫助我們建立管理費資料庫。感謝你的參與！</p>
         <form id="estateForm" action="https://script.google.com/macros/s/AKfycbwvcU6zfG8AdPYE4hiId9tbf5-G2vXh3Yk2pAokMb0vglT_iB7nwYcoPXTvXZV6L0KQag/exec" method="POST" target="hiddenFrame" onsubmit="submitForm()">
             <label for="estateName">屋苑名稱 *</label>
@@ -59,15 +59,15 @@
                 <option value="得寶花園" selected>得寶花園</option>
                 <option value="淘大花園">淘大花園</option>
                 <option value="德福花園">德福花園</option>
-                <option value="custom">自己輸入</option>
+                <option value="custom">自訂</option>
             </select>
             <input type="text" id="customEstate" name="customEstate" style="display:none;" placeholder="請輸入屋苑名稱">
 
             <label for="managementFee">管理費</label>
-            <input type="text" id="managementFee" name="managementFee" placeholder="例如：2.7">
+            <input type="text" id="managementFee" name="managementFee" placeholder="例如：900">
 
             <label for="year">年份 (四位)</label>
-            <input type="text" id="year" name="year" maxlength="4" placeholder="例如：2023">
+            <input type="text" id="year" name="year" maxlength="4" placeholder="例如：2025">
 
             <label for="buildingNumber">座數</label>
             <select id="buildingNumber" name="buildingNumber" onchange="toggleCustomBuilding(this)">
@@ -84,7 +84,7 @@
                 <option value="P">P</option><option value="Q">Q</option><option value="R">R</option><option value="S">S</option><option value="T">T</option>
                 <option value="U">U</option><option value="V">V</option><option value="W">W</option><option value="X">X</option><option value="Y">Y</option>
                 <option value="Z">Z</option>
-                <option value="custom">自己輸入</option>
+                <option value="custom">自訂</option>
             </select>
             <input type="text" id="customBuilding" name="customBuilding" style="display:none;" placeholder="請輸入座數">
 
@@ -103,7 +103,7 @@
                 <option value="P">P</option><option value="Q">Q</option><option value="R">R</option><option value="S">S</option><option value="T">T</option>
                 <option value="U">U</option><option value="V">V</option><option value="W">W</option><option value="X">X</option><option value="Y">Y</option>
                 <option value="Z">Z</option>
-                <option value="custom">自己輸入</option>
+                <option value="custom">自訂</option>
             </select>
             <input type="text" id="customUnit" name="customUnit" style="display:none;" placeholder="請輸入單位">
 
@@ -111,7 +111,7 @@
             <input type="text" id="area" name="area" placeholder="例如：300">
 
             <label for="date">日期 (如有)</label>
-            <input type="text" id="date" name="date" placeholder="例如：2023-10-15">
+            <input type="text" id="date" name="date" placeholder="例如：2025-03-27">
 
             <label for="comments">備註</label>
             <textarea id="comments" name="comments" rows="4" placeholder="其他相關信息"></textarea>
