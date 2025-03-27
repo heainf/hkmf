@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>香港管理費資料收集</title>
+    <title>香港屋苑管理費資料收集</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,7 +51,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>香港管理費資料收集</h1>
+        <h1>香港屋苑管理費資料收集</h1>
         <p>請填寫以下資料，幫助我們建立管理費資料庫。感謝你的參與！</p>
         <form id="estateForm" onsubmit="submitForm(event)">
             <label for="estateName">屋苑名稱 *</label>
@@ -84,22 +84,21 @@
             const data = {};
             formData.forEach((value, key) => data[key] = value);
 
-            // 將資料發送到Google Apps Script
             fetch('https://script.google.com/macros/s/AKfycbwvcU6zfG8AdPYE4hiId9tbf5-G2vXh3Yk2pAokMb0vglT_iB7nwYcoPXTvXZV6L0KQag/exec', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                mode: 'no-cors' // 避免CORS問題
             })
-            .then(response => response.text())
-            .then(result => {
+            .then(() => {
                 alert('感謝你的提交！資料已成功儲存到Google Sheets。');
                 form.reset();
             })
             .catch(error => {
                 console.error('錯誤：', error);
-                alert('提交失敗，請稍後再試。');
+                alert('提交失敗，請稍後再試。錯誤訊息：' + error.message);
             });
         }
     </script>
